@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Secret;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
-class SecretController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SecretController extends Controller
      */
     public function index()
     {
-        return Secret::all();
+        //
     }
 
     /**
@@ -41,10 +41,10 @@ class SecretController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Secret  $secret
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Secret $secret)
+    public function show(Profile $profile)
     {
         //
     }
@@ -52,10 +52,10 @@ class SecretController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Secret  $secret
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Secret $secret)
+    public function edit(Profile $profile)
     {
         //
     }
@@ -64,10 +64,10 @@ class SecretController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Secret  $secret
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Secret $secret)
+    public function update(Request $request, Profile $profile)
     {
         //
     }
@@ -75,10 +75,10 @@ class SecretController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Secret  $secret
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Secret $secret)
+    public function destroy(Profile $profile)
     {
         //
     }

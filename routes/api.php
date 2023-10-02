@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('secrets', [SecretController::class, 'index'])->middleware('auth:sanctum')->name('user.screts');
+// Route::get('secrets', [SecretController::class, 'index'])->middleware('auth:sanctum')->name('user.screts');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 
-class SecretFactory extends Factory
+class ProfileFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,8 +14,8 @@ class SecretFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
-            'secret' => Hash::make('foo')
+            'name' => $this->faker->name(),
+            'active' => rand(0,1)
         ];
     }
 }

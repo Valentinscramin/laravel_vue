@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        \App\Models\Profile::factory(3)->create();
         \App\Models\User::factory(10)->create(['password' => Hash::make('foo')]);
-        \App\Models\Secret::factory(1)->create(['user_id' => 1, 'secret' => Hash::make('foo')]);
     }
 }
