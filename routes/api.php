@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\SecretController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('secrets', [SecretController::class, 'index'])->middleware('auth:sanctum')->name('user.screts');
+Route::get('profiles', [ProfileController::class, 'index'])->middleware('auth:sanctum')->name('profiles');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

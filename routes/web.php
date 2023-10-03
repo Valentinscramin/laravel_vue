@@ -19,4 +19,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth:sanctum')->name('home');
+Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->middleware('auth:sanctum')->name('user.home');

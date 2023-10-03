@@ -14,7 +14,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        $profiles = Profile::all();
+        return json_decode($profiles);
     }
 
     /**
