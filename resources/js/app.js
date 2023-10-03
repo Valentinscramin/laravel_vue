@@ -20,6 +20,7 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('login-component', require('./components/auth/LoginComponent.vue').default);
+Vue.component('navbar-component', require('./components/navbar/NavbarComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

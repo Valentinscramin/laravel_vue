@@ -53,6 +53,9 @@
                 </div>
             </div>
         </div>
+        <div>
+            {{ error }}
+        </div>
     </div>
 </template>
 
@@ -60,6 +63,7 @@
     export default {
         data() {
             return {
+                error: null,
                 formData: {
                     email: null,
                     password: null,
@@ -69,11 +73,10 @@
         methods: {
             async handleLogin(e) {
                 e.preventDefault();
-
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post('/login', this.formData).then(response => {
-                        window.location.href = `/home`;
-                    });
+                        window.location.href = '/home'
+                    }).catch(error => logger.error(error));
                 });
             }
         }
