@@ -13,6 +13,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email"
                                         value="" required v-model="formData.email">
+                                    <small class="text-danger" v-show="email_error">{{ email_error }}</small>
                                 </div>
                             </div>
 
@@ -22,7 +23,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" required
                                         autocomplete="current-password" v-model="formData.password">
-
+                                    <small class="text-danger" v-show="password_error">{{ password_error }}</small>
                                 </div>
                             </div>
 
@@ -53,9 +54,6 @@
                 </div>
             </div>
         </div>
-        <div>
-            {{ error }}
-        </div>
     </div>
 </template>
 
@@ -63,21 +61,37 @@
     export default {
         data() {
             return {
-                error: null,
+                email_error: null,
+                password_error: null,
                 formData: {
                     email: null,
-                    password: null,
+                    password: null
                 }
             }
         },
         methods: {
             async handleLogin(e) {
                 e.preventDefault();
+                console.log(this.formData)
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post('/login', this.formData).then(response => {
+                        console.log(response)
                         window.location.href = '/home'
-                    }).catch(error => logger.error(error));
+                    }).catch(error => {
+                        this.setError(error.response.data.errors)
+                    });
                 });
+            },
+            async setError(param) {
+                if (typeof param.email !== 'undefined') {
+                    this.email_error = param.email[0];
+                    setTimeout(() => this.email_error = '', 5000);
+                }
+                if (typeof param.password_error !== 'undefined') {
+                    this.password_error = param.password_error[0];
+
+                    setTimeout(() => this.password_error = '', 5000);
+                }
             }
         }
     }

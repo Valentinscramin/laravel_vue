@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -16,7 +18,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//PRODUCTS
+Route::get('products-all', [ProductsController::class, 'all'])->middleware('auth:sanctum')->name('products.all');
+Route::post('products-store', [ProductsController::class, 'store'])->middleware('auth:sanctum')->name('products.store');
+Route::post('products-update', [ProductsController::class, 'update'])->middleware('auth:sanctum')->name('products.update');
+
+//CATEGORIES
+Route::get('categories-all', [CategoriesController::class, 'all'])->middleware('auth:sanctum')->name('categories.all');
+Route::post('categories-store', [CategoriesController::class, 'store'])->middleware('auth:sanctum')->name('categories.store');
+Route::post('categories-update', [CategoriesController::class, 'update'])->middleware('auth:sanctum')->name('categories.update');
+
+//PROFILES
 Route::get('profiles', [ProfileController::class, 'index'])->middleware('auth:sanctum')->name('profiles');
+
+//USERS
 Route::get('user-all', [UserController::class, 'all'])->middleware('auth:sanctum')->name('user.all');
 Route::post('user-store', [UserController::class, 'store'])->middleware('auth:sanctum')->name('user.store');
 Route::post('user-update', [UserController::class, 'update'])->middleware('auth:sanctum')->name('user.update');

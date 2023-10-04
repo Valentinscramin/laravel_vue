@@ -14,7 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.categories');
     }
 
     /**
@@ -35,7 +35,12 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categories = new Categories;
+        $categories->name = $request->name;
+        $categories->active = $request->active;
+        $response = $categories->save();
+
+        return json_encode($response);
     }
 
     /**
@@ -69,17 +74,18 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categories $categories)
     {
-        //
+        $categories = Categories::find($request->id);
+        $categories->name = $request->name;
+        $categories->active = $request->active;
+        $response = $categories->update();
+
+        return json_encode($response);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Categories  $categories
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Categories $categories)
+    public function all()
     {
-        //
+        $categories = Categories::all();
+        return $categories;
     }
+
 }

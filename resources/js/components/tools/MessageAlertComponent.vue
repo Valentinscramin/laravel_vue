@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="alert" role="alert">
+        <div class="alert" :class="message.status" role="alert">
             <strong>{{ message . message_header }}</strong> {{ message . message_body }}
         </div>
     </div>

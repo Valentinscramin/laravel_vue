@@ -8,6 +8,9 @@
                 <button class="btn btn-primary" @click="newRegister()">Novo</button>
             </div>
         </div>
+        <div class="search-wrapper mb-1">
+            <input class="form-control" type="text" v-model="filtered" placeholder="Procurar.." />
+        </div>
         <div class="row justify-content-center">
             <div class="table-responsive">
                 <table class="table table-dark">
@@ -84,6 +87,7 @@
                 error: null,
                 section: null,
                 data: null,
+                data_backup: null,
                 registerShow: false,
                 profiles: [],
                 message_show: false,
@@ -99,10 +103,11 @@
                     profile_id: null,
                     password: null,
                     active: null,
-                }
+                },
+                filtered: ''
             }
         },
-        beforeMount() {
+        mounted() {
             this.getAll()
         },
         methods: {
@@ -151,6 +156,7 @@
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.get('api/user-all', this.formData).then(response => {
                         this.data = response.data
+                        this.data_backup = this.data
                     });
                 });
             },
@@ -176,8 +182,26 @@
                     this.message.message_body = "ao salvar Registro"
                 }
 
-                setTimeout(() => this.message_show = false, 10000);
+                setTimeout(() => this.message_show = false, 5000);
 
+            }
+        },
+        watch: {
+            filtered: function(val) {
+
+                if (val.length > 0) {
+                    this.data = this.data_backup
+                    return this.data.filter(data => {
+                        if (data.name.toLowerCase().includes(val.toLowerCase())) {
+                            this.data = Array(JSON.parse(JSON.stringify(data)));
+                        }
+                        if (data.email.toLowerCase().includes(val.toLowerCase())) {
+                            this.data = Array(JSON.parse(JSON.stringify(data)));
+                        }
+                    })
+                } else {
+                    this.data = this.data_backup
+                }
             }
         }
     }

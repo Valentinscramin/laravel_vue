@@ -14,7 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.products');
     }
 
     /**
@@ -35,13 +35,21 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $products = new Products();
+        $products->name = $request->name;
+        $products->price = $request->price;
+        $products->weight = $request->weight;
+        $products->categorie_id = $request->categorie_id;
+        $products->active = $request->active;
+        $response = $products->save();
+
+        return json_encode($response);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Products  $products
+     * @param  \App\Models\products  $products
      * @return \Illuminate\Http\Response
      */
     public function show(Products $products)
@@ -52,7 +60,7 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Products  $products
+     * @param  \App\Models\products  $products
      * @return \Illuminate\Http\Response
      */
     public function edit(Products $products)
@@ -64,22 +72,25 @@ class ProductsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Products  $products
+     * @param  \App\Models\products  $products
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Products $products)
     {
-        //
+        $products = Products::find($request->id);
+        $products->name = $request->name;
+        $products->price = $request->price;
+        $products->weight = $request->weight;
+        $products->categorie_id = $request->categorie_id;
+        $products->active = $request->active;
+        $response = $products->update();
+
+        return json_encode($response);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Products  $products
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Products $products)
+    public function all()
     {
-        //
+        $products = Products::all();
+        return $products;
     }
 }
