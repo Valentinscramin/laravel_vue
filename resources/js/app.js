@@ -24,6 +24,7 @@ Vue.component('navbar-component', require('./components/navbar/NavbarComponent.v
 Vue.component('user-component', require('./components/admin/user/UserComponent.vue').default);
 Vue.component('products-component', require('./components/admin/products/ProductsComponent.vue').default);
 Vue.component('categories-component', require('./components/admin/categories/CategoriesComponent.vue').default);
+Vue.component('guest-component', require('./components/site/guest/GuestComponent.vue').default);
 
 Vue.component('message-alert-component', require('./components/tools/MessageAlertComponent.vue').default);
 

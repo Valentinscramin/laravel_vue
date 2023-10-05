@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand">
                 BBQ EXPRESS
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -13,9 +13,15 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Home</a>
+                        <a class="nav-link" href="/">Delivery de Carnes</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" v-show="logged">|</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" v-show="logged">Dashboard</a>
+                    </li>
+                    <li class="nav-item" v-show="supplier || user">
                         <a class="nav-link" href="/orders">Pedidos</a>
                     </li>
                     <li class="nav-item" v-show="admin">
@@ -30,7 +36,7 @@
                     <li class="nav-item" v-show="admin">
                         <a class="nav-link" href="/sectors">Setores</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-show="admin || user || supplier">
                         <a class="nav-link" href="/profitability">Rentabilidade</a>
                     </li>
                 </ul>
