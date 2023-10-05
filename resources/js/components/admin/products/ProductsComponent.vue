@@ -28,7 +28,7 @@
                         <tr class="" v-for="eachone in data" :key="eachone.id">
                             <td>{{ eachone . name }}</td>
                             <td>{{ eachone . price }}</td>
-                            <td>{{ eachone . wight }}</td>
+                            <td>{{ eachone . weight }}</td>
                             <td>{{ eachone . categorie_id }}</td>
                             <td>{{ eachone . active }}</td>
                             <td><button class="btn btn-light btn-sm" @click="editRegister(eachone)">Editar</button></td>
@@ -50,6 +50,11 @@
                         aria-describedby="helpId" v-model="formData.name">
                 </div>
                 <div class="m-3">
+                    <label for="description" class="form-label">Descrição</label>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="10"
+                        v-model="formData.description"></textarea>
+                </div>
+                <div class="m-3">
                     <label for="price" class="form-label">Preço</label>
                     <input type="number" name="price" id="price" class="form-control" placeholder=""
                         aria-describedby="helpId" v-model="formData.price" min="0" max="1000" step="0.01">
@@ -63,7 +68,7 @@
                 <div class="m-3">
                     <label for="categories" class="form-label">Categoria</label>
                     <select class="form-select form-select-lg" name="categories" id="profile"
-                        v-model="formData.profile_id">
+                        v-model="formData.categorie_id">
                         <option v-for="eachone in categories" :key="eachone.id" :value="eachone.id">
                             {{ eachone . name }}</option>
                     </select>
@@ -102,6 +107,7 @@
                 formData: {
                     id: null,
                     name: null,
+                    description: null,
                     price: null,
                     weight: null,
                     categorie_id: null,
@@ -120,6 +126,7 @@
                 // input elements
                 this.formData.id = selected.id
                 this.formData.name = selected.name
+                this.formData.description = selected.description
                 this.formData.price = selected.price
                 this.formData.weight = selected.weight
                 this.formData.categorie_id = selected.categorie_id
@@ -135,6 +142,8 @@
             },
             async saveRegister(e) {
                 e.preventDefault();
+
+                console.log(this.formData)
 
                 let url = 'api/products-store'
                 if (this.formData.id !== null) {
@@ -167,6 +176,7 @@
             cleanInputs() {
                 this.formData.id = null
                 this.formData.name = null
+                this.formData.description = null
                 this.formData.price = null
                 this.formData.weight = null
                 this.formData.categorie_id = null
@@ -192,7 +202,6 @@
         },
         watch: {
             filtered: function(val) {
-
                 if (val.length > 0) {
                     this.data = this.data_backup
                     return this.data.filter(data => {

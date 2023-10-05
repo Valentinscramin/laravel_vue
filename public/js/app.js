@@ -5260,6 +5260,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       formData: {
         id: null,
         name: null,
+        description: null,
         price: null,
         weight: null,
         categorie_id: null,
@@ -5283,12 +5284,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               // input elements
               _this.formData.id = selected.id;
               _this.formData.name = selected.name;
+              _this.formData.description = selected.description;
               _this.formData.price = selected.price;
               _this.formData.weight = selected.weight;
               _this.formData.categorie_id = selected.categorie_id;
               _this.formData.active = selected.active;
               _this.getCategories();
-            case 9:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -5321,6 +5323,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
+              console.log(_this3.formData);
               url = 'api/products-store';
               if (_this3.formData.id !== null) {
                 url = 'api/products-update';
@@ -5332,7 +5335,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               });
               _this3.getAll();
               _this3.registerShow = false;
-            case 6:
+            case 7:
             case "end":
               return _context3.stop();
           }
@@ -5379,6 +5382,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     cleanInputs: function cleanInputs() {
       this.formData.id = null;
       this.formData.name = null;
+      this.formData.description = null;
       this.formData.price = null;
       this.formData.weight = null;
       this.formData.categorie_id = null;
@@ -6042,7 +6046,7 @@ var render = function render() {
   }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.data, function (eachone) {
     return _c("tr", {
       key: eachone.id
-    }, [_c("td", [_vm._v(_vm._s(eachone.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.price))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.wight))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.categorie_id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.active))]), _vm._v(" "), _c("td", [_c("button", {
+    }, [_c("td", [_vm._v(_vm._s(eachone.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.price))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.weight))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.categorie_id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.active))]), _vm._v(" "), _c("td", [_c("button", {
       staticClass: "btn btn-light btn-sm",
       on: {
         click: function click($event) {
@@ -6108,6 +6112,36 @@ var render = function render() {
       input: function input($event) {
         if ($event.target.composing) return;
         _vm.$set(_vm.formData, "name", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "m-3"
+  }, [_c("label", {
+    staticClass: "form-label",
+    attrs: {
+      "for": "description"
+    }
+  }, [_vm._v("Descrição")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.formData.description,
+      expression: "formData.description"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      name: "description",
+      id: "description",
+      cols: "30",
+      rows: "10"
+    },
+    domProps: {
+      value: _vm.formData.description
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.formData, "description", $event.target.value);
       }
     }
   })]), _vm._v(" "), _c("div", {
@@ -6189,8 +6223,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.formData.profile_id,
-      expression: "formData.profile_id"
+      value: _vm.formData.categorie_id,
+      expression: "formData.categorie_id"
     }],
     staticClass: "form-select form-select-lg",
     attrs: {
@@ -6205,7 +6239,7 @@ var render = function render() {
           var val = "_value" in o ? o._value : o.value;
           return val;
         });
-        _vm.$set(_vm.formData, "profile_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        _vm.$set(_vm.formData, "categorie_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
       }
     }
   }, _vm._l(_vm.categories, function (eachone) {

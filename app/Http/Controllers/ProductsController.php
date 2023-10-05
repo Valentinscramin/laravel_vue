@@ -37,6 +37,7 @@ class ProductsController extends Controller
     {
         $products = new Products();
         $products->name = $request->name;
+        $products->description = $request->description;
         $products->price = $request->price;
         $products->weight = $request->weight;
         $products->categorie_id = $request->categorie_id;
@@ -79,6 +80,7 @@ class ProductsController extends Controller
     {
         $products = Products::find($request->id);
         $products->name = $request->name;
+        $products->description = $request->description;
         $products->price = $request->price;
         $products->weight = $request->weight;
         $products->categorie_id = $request->categorie_id;
