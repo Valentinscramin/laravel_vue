@@ -75,7 +75,6 @@
                 console.log(this.formData)
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post('/login', this.formData).then(response => {
-                        console.log(response)
                         window.location.href = '/home'
                     }).catch(error => {
                         this.setError(error.response.data.errors)

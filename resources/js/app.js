@@ -8,31 +8,16 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 import * as VueGoogleMaps from 'vue2-google-maps';
+import GmapCustomMarker from 'vue2-gmap-custom-marker';
+import VueCookies from 'vue3-cookies';
 
 Vue.use(VueGoogleMaps, {
-    load: {
-      key: '',
-      libraries: 'places', // This is required if you use the Autocomplete plugin
-      // OR: libraries: 'places,drawing'
-      // OR: libraries: 'places,drawing,visualization'
-      // (as you require)
-   
-      //// If you want to set the version, you can do so:
-      // v: '3.26',
-    },
-   
-    //// If you intend to programmatically custom event listener code
-    //// (e.g. `this.$refs.gmap.$on('zoom_changed', someFunc)`)
-    //// instead of going through Vue templates (e.g. `<GmapMap @zoom_changed="someFunc">`)
-    //// you might need to turn this on.
-    // autobindAllEvents: false,
-   
-    //// If you want to manually install components, e.g.
-    //// import {GmapMarker} from 'vue2-google-maps/src/components/marker'
-    //// Vue.component('GmapMarker', GmapMarker)
-    //// then disable the following:
-    // installComponents: true,
+load: {
+key: 'AIzaSyBQKKBGo-3kPnFhSHDH2Q8AOPTQmEaAZKs',
+libraries: 'places',
+}
 });
+Vue.use(GmapCustomMarker)
 
 /**
 * The following block of code may be used to automatically register your
@@ -46,11 +31,13 @@ Vue.use(VueGoogleMaps, {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('login-component', require('./components/auth/LoginComponent.vue').default);
+Vue.component('register-component', require('./components/auth/RegisterComponent.vue').default);
 Vue.component('navbar-component', require('./components/navbar/NavbarComponent.vue').default);
 Vue.component('user-component', require('./components/admin/user/UserComponent.vue').default);
 Vue.component('products-component', require('./components/admin/products/ProductsComponent.vue').default);
 Vue.component('categories-component', require('./components/admin/categories/CategoriesComponent.vue').default);
 Vue.component('guest-component', require('./components/site/guest/GuestComponent.vue').default);
+Vue.component('loged-component', require('./components/site/loged/LogedComponent.vue').default);
 
 Vue.component('message-alert-component', require('./components/tools/MessageAlertComponent.vue').default);
 

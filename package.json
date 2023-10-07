@@ -25,6 +25,9 @@
     },
     "dependencies": {
         "@fawmi/vue-google-maps": "^0.9.79",
-        "vue2-google-maps": "^0.10.7"
+        "universal-cookie": "^6.1.1",
+        "vue2-gmap-custom-marker": "^6.1.1",
+        "vue2-google-maps": "^0.10.7",
+        "vue3-cookies": "^1.0.6"
     }
 }
