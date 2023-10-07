@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/register/{{address}}', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth:sanctum')->name('home');
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->middleware('auth:sanctum')->name('admin.users');
 Route::get('/products', [App\Http\Controllers\ProductsController::class, 'index'])->middleware('auth:sanctum')->name('admin.products');

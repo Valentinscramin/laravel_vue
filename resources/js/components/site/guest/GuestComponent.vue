@@ -48,10 +48,11 @@
                         </div>
                         <button class="btn btn-sm btn-success" v-on:click="searchLocation()">Procurar</button>
                         <GmapMap class="mt-2" :center="{ lat: currentLocation.lat, lng: currentLocation.lng }"
-                            :zoom="17" :options="{ disableDefaultUI: true }" map-type-id="terrain"
-                            style="width: 100%; height: 300px">
-                            <!-- <GmapMarker :key="index" v-for="(m, index) in markers" :position="m.position"
-                                :clickable="true" :draggable="true" @click="center=m.position" /> -->
+                            :zoom="17" :icon="{}" :options="{ disableDefaultUI: true }"
+                            map-type-id="terrain" style="width: 100%; height: 300px">
+                            <GmapCustomMarker :marker="currentLocation">
+                                <img style="width:30px;height:50;" src="https://vuejs.org/images/logo.png" />
+                            </GmapCustomMarker>
                         </GmapMap>
                         <hr>
                         <small><a class="btn btn-sm btn-link" href="/login">Click aqui caso já possua uma
@@ -60,7 +61,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
                             @click="showModal">Fechar</button>
-                        <button type="button" class="btn btn-primary">Confirmar Endereço</button>
+                        <a type="button" class="btn btn-primary" href="/register">Confirmar Endereço</a>
                     </div>
                 </div>
             </div>
@@ -68,12 +69,16 @@
     </div>
 </template>
 <script>
+    import GmapCustomMarker from 'vue2-gmap-custom-marker'
+
     export default {
         data() {
             return {
                 isActive: false,
                 address: '',
                 error: null,
+                latitude: null,
+                longitude: null,
                 currentLocation: {
                     lat: 0,
                     lng: 0
@@ -105,12 +110,17 @@
                     'address': this.address
                 }, (results, status) => {
                     if (status === 'OK') {
+                        this.address = results[0].formatted_address;
+                        localStorage.address = this.address
                         this.currentLocation.lat = results[0].geometry.location.lat();
                         this.currentLocation.lng = results[0].geometry.location.lng();
                     }
                 });
             }
         },
+        components: {
+            GmapCustomMarker
+        }
     }
 </script>
 <style scoped>
