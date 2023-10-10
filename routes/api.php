@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 //PRODUCTS
 Route::get('products-all', [ProductsController::class, 'all'])->middleware('auth:sanctum')->name('products.all');
+Route::post('products-by-categorie', [ProductsController::class, 'getByCategorie'])->middleware('auth:sanctum')->name('products.getCategorie');
 Route::post('products-store', [ProductsController::class, 'store'])->middleware('auth:sanctum')->name('products.store');
 Route::post('products-update', [ProductsController::class, 'update'])->middleware('auth:sanctum')->name('products.update');
 
