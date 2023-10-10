@@ -43,10 +43,12 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
+                    <li class="nav-item" v-show="logged">
+                        <a class="nav-link" @click="openCart()">Cart</a>
+                    </li>
                     <li class="nav-item" v-show="!logged">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
-
                     <li class="nav-item" v-show="!logged">
                         <a class="nav-link" href="/register">Register</a>
                     </li>
@@ -116,6 +118,9 @@
                         this.admin = true;
                         break;
                 }
+            },
+            async openCart() {
+                console.log("openCart")
             }
         }
     }

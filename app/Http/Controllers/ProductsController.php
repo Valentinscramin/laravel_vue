@@ -95,4 +95,10 @@ class ProductsController extends Controller
         $products = Products::all();
         return $products;
     }
+
+    public function getByCategorie(Request $request)
+    {
+        $products = Products::where('categorie_id', '=', $request->categorie_id)->get();
+        return $products;
+    }
 }
