@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -28,33 +29,33 @@ class UserController extends Controller
         return view('admin.user');
     }
 
-    public function store(Request $request)
+    public function store(UserUpdateRequest $userUpdateRequest, User $user)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->profile_id = $request->profile_id;
-        $user->active = $request->active;
+        $user->name = $userUpdateRequest->input('name'); //$userUpdateRequest->name;
+        $user->email = $userUpdateRequest->email;
+        $user->password = Hash::make($userUpdateRequest->password);
+        $user->profile_id = $userUpdateRequest->profile_id;
+        $user->active = $userUpdateRequest->active;
+        // dd($user);
         $response = $user->save();
 
         return json_encode($response);
     }
 
-    public function update(Request $request)
+    public function update(UserUpdateRequest $userUpdateRequest, User $user)
     {
-        $user = User::find($request->id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->profile_id = $request->profile_id;
-        $user->active = $request->active;
+        $user = User::findOrFail($userUpdateRequest->id);
+        $user->name = $userUpdateRequest->name;
+        $user->email = $userUpdateRequest->email;
+        $user->password = Hash::make($userUpdateRequest->password);
+        $user->profile_id = $userUpdateRequest->profile_id;
+        $user->active = $userUpdateRequest->active;
         $response = $user->update();
 
         return json_encode($response);
     }
 
-    public function all()
+    public function all(Request $userUpdateRequest)
     {
         $users = User::all();
         return $users;

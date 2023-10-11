@@ -128,6 +128,7 @@
                 this.registerShow = true
                 // input elements
                 this.cleanInputs()
+                this.getProfiles()
             },
             async saveRegister(e) {
                 e.preventDefault();
@@ -136,8 +137,10 @@
                 if (this.formData.id !== null) {
                     url = 'api/user-update'
                 }
+
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post(url, this.formData).then(response => {
+                        console.log(response)
                         this.alert(response.status)
                     });
                 });

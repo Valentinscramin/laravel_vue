@@ -5502,7 +5502,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this2.registerShow = true;
               // input elements
               _this2.cleanInputs();
-            case 3:
+              _this2.getProfiles();
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -5523,6 +5524,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               }
               axios.get('/sanctum/csrf-cookie').then(function (response) {
                 axios.post(url, _this3.formData).then(function (response) {
+                  console.log(response);
                   _this3.alert(response.status);
                 });
               });
