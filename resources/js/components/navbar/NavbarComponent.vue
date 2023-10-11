@@ -105,7 +105,7 @@
         },
         methods: {
             verifyProfiles(user) {
-                switch (user.profile_id) {
+                switch (user.profiles_id) {
                     case 1:
                         this.user = true;
                         break;

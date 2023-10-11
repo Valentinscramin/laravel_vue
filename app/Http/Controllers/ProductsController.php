@@ -7,98 +7,27 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('admin.products');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request, Products $products)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $products = new Products();
-        $products->name = $request->name;
-        $products->description = $request->description;
-        $products->price = $request->price;
-        $products->weight = $request->weight;
-        $products->categorie_id = $request->categorie_id;
-        $products->active = $request->active;
-        $response = $products->save();
+        $response = $products::create($request->all());
 
         return json_encode($response);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\products  $products
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Products $products)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\products  $products
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Products $products)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\products  $products
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Products $products)
     {
-        $products = Products::find($request->id);
-        $products->name = $request->name;
-        $products->description = $request->description;
-        $products->price = $request->price;
-        $products->weight = $request->weight;
-        $products->categorie_id = $request->categorie_id;
-        $products->active = $request->active;
-        $response = $products->update();
+        $response = $products->update($request->all());
 
         return json_encode($response);
     }
 
-    public function all()
+    public function all(Products $products)
     {
-        $products = Products::all();
-        return $products;
-    }
-
-    public function getByCategorie(Request $request)
-    {
-        $products = Products::where('categorie_id', '=', $request->categorie_id)->get();
-        return $products;
+        return $products->with('categories')->get();
     }
 }

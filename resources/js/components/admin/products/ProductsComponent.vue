@@ -29,7 +29,7 @@
                             <td>{{ eachone . name }}</td>
                             <td>{{ eachone . price }}</td>
                             <td>{{ eachone . weight }}</td>
-                            <td>{{ eachone . categorie_id }}</td>
+                            <td>{{ eachone . categories . name }}</td>
                             <td>{{ eachone . active }}</td>
                             <td><button class="btn btn-light btn-sm" @click="editRegister(eachone)">Editar</button></td>
                         </tr>
@@ -68,7 +68,7 @@
                 <div class="m-3">
                     <label for="categories" class="form-label">Categoria</label>
                     <select class="form-select form-select-lg" name="categories" id="profile"
-                        v-model="formData.categorie_id">
+                        v-model="formData.categories_id">
                         <option v-for="eachone in categories" :key="eachone.id" :value="eachone.id">
                             {{ eachone . name }}</option>
                     </select>
@@ -110,7 +110,7 @@
                     description: null,
                     price: null,
                     weight: null,
-                    categorie_id: null,
+                    categories_id: null,
                     active: null,
                 },
                 filtered: ''
@@ -129,7 +129,7 @@
                 this.formData.description = selected.description
                 this.formData.price = selected.price
                 this.formData.weight = selected.weight
-                this.formData.categorie_id = selected.categorie_id
+                this.formData.categories_id = selected.categories_id
                 this.formData.active = selected.active
                 this.getCategories()
             },
@@ -143,11 +143,9 @@
             async saveRegister(e) {
                 e.preventDefault();
 
-                console.log(this.formData)
-
-                let url = 'api/products-store'
+                let url = 'api/products/store'
                 if (this.formData.id !== null) {
-                    url = 'api/products-update'
+                    url = 'api/products/' + this.formData.id + '/update'
                 }
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post(url, this.formData).then(response => {
@@ -160,14 +158,14 @@
             },
             async getCategories() {
                 axios.get('/sanctum/csrf-cookie').then(response => {
-                    axios.get('api/categories-all', this.formData).then(response => {
+                    axios.get('api/categories/all', this.formData).then(response => {
                         this.categories = response.data
                     });
                 });
             },
             async getAll() {
                 axios.get('/sanctum/csrf-cookie').then(response => {
-                    axios.get('api/products-all', this.formData).then(response => {
+                    axios.get('api/products/all', this.formData).then(response => {
                         this.data = response.data
                         this.data_backup = this.data
                     });
@@ -179,7 +177,7 @@
                 this.formData.description = null
                 this.formData.price = null
                 this.formData.weight = null
-                this.formData.categorie_id = null
+                this.formData.categories_id = null
                 this.formData.active = null
             },
             alert(status) {

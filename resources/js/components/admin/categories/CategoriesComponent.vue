@@ -102,9 +102,9 @@
             async saveRegister(e) {
                 e.preventDefault();
 
-                let url = 'api/categories-store'
+                let url = 'api/categories/store'
                 if (this.formData.id !== null) {
-                    url = 'api/categories-update'
+                    url = 'api/categories/'+this.formData.id+'/update'
                 }
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post(url, this.formData).then(response => {
@@ -117,7 +117,7 @@
             },
             async getAll() {
                 axios.get('/sanctum/csrf-cookie').then(response => {
-                    axios.get('api/categories-all', this.formData).then(response => {
+                    axios.get('api/categories/all', this.formData).then(response => {
                         this.data = response.data
                         this.data_backup = this.data
                     });

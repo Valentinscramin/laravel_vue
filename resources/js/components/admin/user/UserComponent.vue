@@ -26,7 +26,7 @@
                         <tr class="" v-for="eachone in data" :key="eachone.id">
                             <td>{{ eachone . name }}</td>
                             <td>{{ eachone . email }}</td>
-                            <td>{{ eachone . profile_id }}</td>
+                            <td>{{ eachone . profiles . name }}</td>
                             <td><button class="btn btn-light btn-sm" @click="editRegister(eachone)">Editar</button></td>
                         </tr>
                     </tbody>
@@ -54,7 +54,7 @@
 
                     <label for="" class="form-label">Perfil</label>
                     <select class="form-select form-select-lg" name="profile" id="profile"
-                        v-model="formData.profile_id">
+                        v-model="formData.profiles_id">
                         <option selected :value="null">Selecione um perfil</option>
                         <option v-for="eachone in profiles" :key="eachone.id" :value="eachone.id">
                             {{ eachone . name }}</option>
@@ -100,7 +100,7 @@
                     id: null,
                     name: null,
                     email: null,
-                    profile_id: null,
+                    profiles_id: null,
                     password: null,
                     active: null,
                 },
@@ -118,7 +118,7 @@
                 this.formData.id = selected.id
                 this.formData.name = selected.name
                 this.formData.email = selected.email
-                this.formData.profile_id = selected.profile_id
+                this.formData.profiles_id = selected.profiles_id
                 this.formData.password = selected.password
                 this.formData.active = selected.active
                 this.getProfiles()
@@ -133,14 +133,13 @@
             async saveRegister(e) {
                 e.preventDefault();
 
-                let url = 'api/user-store'
+                let url = 'api/user/store'
                 if (this.formData.id !== null) {
-                    url = 'api/user-update'
+                    url = 'api/user/' + this.formData.id + '/update'
                 }
 
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post(url, this.formData).then(response => {
-                        console.log(response)
                         this.alert(response.status)
                     });
                 });
@@ -150,14 +149,14 @@
             },
             async getProfiles() {
                 axios.get('/sanctum/csrf-cookie').then(response => {
-                    axios.get('api/profiles', this.formData).then(response => {
+                    axios.get('api/profiles/all', this.formData).then(response => {
                         this.profiles = response.data
                     });
                 });
             },
             async getAll() {
                 axios.get('/sanctum/csrf-cookie').then(response => {
-                    axios.get('api/user-all', this.formData).then(response => {
+                    axios.get('api/user/all', this.formData).then(response => {
                         this.data = response.data
                         this.data_backup = this.data
                     });
@@ -167,7 +166,7 @@
                 this.formData.id = null
                 this.formData.name = null
                 this.formData.email = null
-                this.formData.profile_id = null
+                this.formData.profiles_id = null
                 this.password = null
                 this.formData.active = null
             },
@@ -191,7 +190,6 @@
         },
         watch: {
             filtered: function(val) {
-
                 if (val.length > 0) {
                     this.data = this.data_backup
                     return this.data.filter(data => {

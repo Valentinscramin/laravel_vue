@@ -5149,9 +5149,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
-              url = 'api/categories-store';
+              url = 'api/categories/store';
               if (_this3.formData.id !== null) {
-                url = 'api/categories-update';
+                url = 'api/categories/' + _this3.formData.id + '/update';
               }
               axios.get('/sanctum/csrf-cookie').then(function (response) {
                 axios.post(url, _this3.formData).then(function (response) {
@@ -5174,7 +5174,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context4.prev = _context4.next) {
             case 0:
               axios.get('/sanctum/csrf-cookie').then(function (response) {
-                axios.get('api/categories-all', _this4.formData).then(function (response) {
+                axios.get('api/categories/all', _this4.formData).then(function (response) {
                   _this4.data = response.data;
                   _this4.data_backup = _this4.data;
                 });
@@ -5263,7 +5263,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         description: null,
         price: null,
         weight: null,
-        categorie_id: null,
+        categories_id: null,
         active: null
       },
       filtered: ''
@@ -5287,7 +5287,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this.formData.description = selected.description;
               _this.formData.price = selected.price;
               _this.formData.weight = selected.weight;
-              _this.formData.categorie_id = selected.categorie_id;
+              _this.formData.categories_id = selected.categories_id;
               _this.formData.active = selected.active;
               _this.getCategories();
             case 10:
@@ -5323,10 +5323,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
-              console.log(_this3.formData);
-              url = 'api/products-store';
+              url = 'api/products/store';
               if (_this3.formData.id !== null) {
-                url = 'api/products-update';
+                url = 'api/products/' + _this3.formData.id + '/update';
               }
               axios.get('/sanctum/csrf-cookie').then(function (response) {
                 axios.post(url, _this3.formData).then(function (response) {
@@ -5335,7 +5334,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               });
               _this3.getAll();
               _this3.registerShow = false;
-            case 7:
+            case 6:
             case "end":
               return _context3.stop();
           }
@@ -5349,7 +5348,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context4.prev = _context4.next) {
             case 0:
               axios.get('/sanctum/csrf-cookie').then(function (response) {
-                axios.get('api/categories-all', _this4.formData).then(function (response) {
+                axios.get('api/categories/all', _this4.formData).then(function (response) {
                   _this4.categories = response.data;
                 });
               });
@@ -5367,7 +5366,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
               axios.get('/sanctum/csrf-cookie').then(function (response) {
-                axios.get('api/products-all', _this5.formData).then(function (response) {
+                axios.get('api/products/all', _this5.formData).then(function (response) {
                   _this5.data = response.data;
                   _this5.data_backup = _this5.data;
                 });
@@ -5385,7 +5384,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.formData.description = null;
       this.formData.price = null;
       this.formData.weight = null;
-      this.formData.categorie_id = null;
+      this.formData.categories_id = null;
       this.formData.active = null;
     },
     alert: function alert(status) {
@@ -5458,7 +5457,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         id: null,
         name: null,
         email: null,
-        profile_id: null,
+        profiles_id: null,
         password: null,
         active: null
       },
@@ -5481,7 +5480,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this.formData.id = selected.id;
               _this.formData.name = selected.name;
               _this.formData.email = selected.email;
-              _this.formData.profile_id = selected.profile_id;
+              _this.formData.profiles_id = selected.profiles_id;
               _this.formData.password = selected.password;
               _this.formData.active = selected.active;
               _this.getProfiles();
@@ -5518,13 +5517,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
-              url = 'api/user-store';
+              url = 'api/user/store';
               if (_this3.formData.id !== null) {
-                url = 'api/user-update';
+                url = 'api/user/' + _this3.formData.id + '/update';
               }
               axios.get('/sanctum/csrf-cookie').then(function (response) {
                 axios.post(url, _this3.formData).then(function (response) {
-                  console.log(response);
                   _this3.alert(response.status);
                 });
               });
@@ -5544,7 +5542,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context4.prev = _context4.next) {
             case 0:
               axios.get('/sanctum/csrf-cookie').then(function (response) {
-                axios.get('api/profiles', _this4.formData).then(function (response) {
+                axios.get('api/profiles/all', _this4.formData).then(function (response) {
                   _this4.profiles = response.data;
                 });
               });
@@ -5562,7 +5560,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
               axios.get('/sanctum/csrf-cookie').then(function (response) {
-                axios.get('api/user-all', _this5.formData).then(function (response) {
+                axios.get('api/user/all', _this5.formData).then(function (response) {
                   _this5.data = response.data;
                   _this5.data_backup = _this5.data;
                 });
@@ -5578,7 +5576,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.formData.id = null;
       this.formData.name = null;
       this.formData.email = null;
-      this.formData.profile_id = null;
+      this.formData.profiles_id = null;
       this.password = null;
       this.formData.active = null;
     },
@@ -5821,7 +5819,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     verifyProfiles: function verifyProfiles(user) {
-      switch (user.profile_id) {
+      switch (user.profiles_id) {
         case 1:
           this.user = true;
           break;
@@ -5994,7 +5992,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context.prev = _context.next) {
             case 0:
               axios.get('/sanctum/csrf-cookie').then(function (response) {
-                axios.get('api/categories-all').then(function (response) {
+                axios.get('api/categories/all').then(function (response) {
                   _this.categories = response.data;
                 });
               });
@@ -6012,7 +6010,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               axios.get('/sanctum/csrf-cookie').then(function (response) {
-                axios.get('api/products-all').then(function (response) {
+                axios.get('api/products/all').then(function (response) {
                   _this2.products = response.data;
                   _this2.productsBkp = response.data;
                 });
@@ -6356,7 +6354,7 @@ var render = function render() {
   }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.data, function (eachone) {
     return _c("tr", {
       key: eachone.id
-    }, [_c("td", [_vm._v(_vm._s(eachone.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.price))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.weight))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.categorie_id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.active))]), _vm._v(" "), _c("td", [_c("button", {
+    }, [_c("td", [_vm._v(_vm._s(eachone.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.price))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.weight))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.categories.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.active))]), _vm._v(" "), _c("td", [_c("button", {
       staticClass: "btn btn-light btn-sm",
       on: {
         click: function click($event) {
@@ -6533,8 +6531,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.formData.categorie_id,
-      expression: "formData.categorie_id"
+      value: _vm.formData.categories_id,
+      expression: "formData.categories_id"
     }],
     staticClass: "form-select form-select-lg",
     attrs: {
@@ -6549,7 +6547,7 @@ var render = function render() {
           var val = "_value" in o ? o._value : o.value;
           return val;
         });
-        _vm.$set(_vm.formData, "categorie_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        _vm.$set(_vm.formData, "categories_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
       }
     }
   }, _vm._l(_vm.categories, function (eachone) {
@@ -6707,7 +6705,7 @@ var render = function render() {
   }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.data, function (eachone) {
     return _c("tr", {
       key: eachone.id
-    }, [_c("td", [_vm._v(_vm._s(eachone.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.email))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.profile_id))]), _vm._v(" "), _c("td", [_c("button", {
+    }, [_c("td", [_vm._v(_vm._s(eachone.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.email))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(eachone.profiles.name))]), _vm._v(" "), _c("td", [_c("button", {
       staticClass: "btn btn-light btn-sm",
       on: {
         click: function click($event) {
@@ -6817,8 +6815,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.formData.profile_id,
-      expression: "formData.profile_id"
+      value: _vm.formData.profiles_id,
+      expression: "formData.profiles_id"
     }],
     staticClass: "form-select form-select-lg",
     attrs: {
@@ -6833,7 +6831,7 @@ var render = function render() {
           var val = "_value" in o ? o._value : o.value;
           return val;
         });
-        _vm.$set(_vm.formData, "profile_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        _vm.$set(_vm.formData, "profiles_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
       }
     }
   }, [_c("option", {
