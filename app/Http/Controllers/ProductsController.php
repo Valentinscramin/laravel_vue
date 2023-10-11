@@ -14,16 +14,12 @@ class ProductsController extends Controller
 
     public function store(Request $request, Products $products)
     {
-        $response = $products::create($request->all());
-
-        return json_encode($response);
+        return json_encode($products::create($request->all()));
     }
 
     public function update(Request $request, Products $products)
     {
-        $response = $products->update($request->all());
-
-        return json_encode($response);
+        return json_encode($products->update($request->all()));
     }
 
     public function all(Products $products)

@@ -21,17 +21,15 @@ class UserController extends Controller
     public function store(Request $request, User $user)
     {
         $request['password'] = Hash::make($request->password);
-        $response = $user::create($request->all());
 
-        return json_encode($response);
+        return json_encode($user::create($request->all()));
     }
 
     public function update(Request $request, User $user)
     {
         $request['password'] = Hash::make($request->password);
-        $response = $user->update($request->all());
 
-        return json_encode($response);
+        return json_encode($user->update($request->all()));
     }
 
     public function all(User $user)

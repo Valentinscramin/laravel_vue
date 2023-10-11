@@ -14,15 +14,12 @@ class CategoriesController extends Controller
 
     public function store(Request $request, Categories $categories)
     {
-        $response = $categories::create($request->all());
-        return json_encode($response);
+        return json_encode($categories::create($request->all()));
     }
 
     public function update(Request $request, Categories $categories)
     {
-        $response = $categories->update($request->all());
-
-        return json_encode($response);
+        return json_encode($categories->update($request->all()));
     }
 
     public function all(Categories $categories)
