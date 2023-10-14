@@ -8,55 +8,32 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         return view('admin.user');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->profile_id = $request->profile_id;
-        $user->active = $request->active;
-        $response = $user->save();
+        $request['password'] = Hash::make($request->password);
 
-        return json_encode($response);
+        return json_encode($user::create($request->all()));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        $user = User::find($request->id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->profile_id = $request->profile_id;
-        $user->active = $request->active;
-        $response = $user->update();
+        $request['password'] = Hash::make($request->password);
 
-        return json_encode($response);
+        return json_encode($user->update($request->all()));
     }
 
-    public function all()
+    public function all(User $user)
     {
-        $users = User::all();
-        return $users;
+        return $user->with('profiles')->get();
     }
 }
